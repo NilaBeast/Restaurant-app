@@ -1,9 +1,23 @@
-import React from 'react'
+import { useCart } from "../context/CartContext";
+import CartItem from "../components/cart/CartItem";
+import CartSummary from "../components/cart/CartSummary";
 
-const Cart = () => {
+export default function Cart() {
+  const { cart } = useCart();
+
   return (
-    <div>Cart</div>
-  )
-}
+    <div className="p-10">
+      <h2 className="text-3xl font-bold mb-6">Your Cart</h2>
 
-export default Cart
+      {cart.length === 0 && (
+        <p className="text-gray-500">Cart is empty</p>
+      )}
+
+      {cart.map((item) => (
+        <CartItem key={item.id} item={item} />
+      ))}
+
+      {cart.length > 0 && <CartSummary />}
+    </div>
+  );
+}

@@ -1,9 +1,11 @@
-import React from 'react'
+import MenuList from "../components/menu/MenuList";
+import React from "react";
 
-const Menu = () => {
+export default function Mwnu() {
   return (
-    <div>Menu</div>
+    <div className="p-10">
+      <h2 className="text-3xl font-bold mb-6">Our Menu</h2>
+      <MenuList />
+    </div>
   )
 }
-
-export default Menu
