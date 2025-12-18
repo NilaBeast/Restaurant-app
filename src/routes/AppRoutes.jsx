@@ -1,17 +1,19 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Menu from "../pages/Menu";
 import Cart from "../pages/Cart";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 export default function AppRoutes() {
   return (
-    <main>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
-    </main>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/menu" element={<Menu />} />
+      <Route path="/cart" element={<Cart />} />
+    </Routes>
   );
 }

@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
-import Navbar from "./components/common/Navbar"
-import Footer from "./components/common/Footer"
-import AppRoutes from "./routes/AppRoutes"
+import AppRoutes from "./routes/AppRoutes";
+import Navbar from "./components/common/Navbar";
+import Footer from "./components/common/Footer";
 
 export default function App() {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <AppRoutes />
+
+      {/* Main content grows to push footer down */}
+      <main className="flex-grow">
+        <AppRoutes />
+      </main>
+
       <Footer />
-    </>
+    </div>
   );
 }

@@ -1,18 +1,33 @@
-import React from "react";
 import NavItem from "./NavItem";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-  return (
-    <nav className="bg-violet-900 p-4 flex gap-6 6">
-      {/* <Link to="/">Home</Link>
-      <Link to="/menu">Menu</Link>
-      <Link to="/cart">Cart</Link> */}
-     
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-      <NavItem to="/" nav="Home" icon="bx bx-tachometer" className="text-white hover:text-yellow-400" />
-      <NavItem to="/cart" nav="Cart" icon="bx bx-tachometer" className="text-white hover:text-yellow-400" />
-      <NavItem to="/menu" nav="Menu" icon="bx bx-tachometer" className="text-white hover:text-yellow-400" />
-     
+  if (!user) return null; // 🔥 hide navbar if not logged in
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
+  return (
+    <nav className="bg-violet-900 p-4 flex justify-around items-center gap-6">
+      <ul className="flex gap-5">
+      <NavItem to="/home" nav="Home" />
+      <NavItem to="/menu" nav="Menu" />
+      <NavItem to="/cart" nav="Cart" />
+
+      </ul>
+
+      <button
+        onClick={handleLogout}
+        className="bg-red-500 px-3 py-1 rounded text-white"
+      >
+        Logout
+      </button>
     </nav>
   );
 }
