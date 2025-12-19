@@ -1,33 +1,39 @@
-import NavItem from "./NavItem";
+import { motion } from "framer-motion";
 import { useAuth } from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import NavItem from "./NavItem";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const { cart } = useCart();
   const navigate = useNavigate();
 
-  if (!user) return null; // 🔥 hide navbar if not logged in
+  if (!user) return null;
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
+  const totalQty = cart.reduce((s, i) => s + i.qty, 0);
 
   return (
-    <nav className="bg-violet-900 p-4 flex justify-around items-center gap-6">
-      <ul className="flex gap-5">
-      <NavItem to="/home" nav="Home" />
-      <NavItem to="/menu" nav="Menu" />
-      <NavItem to="/cart" nav="Cart" />
-
+    <motion.nav
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      className="bg-gradient-to-r from-violet-900 to-indigo-900 px-6 py-4 flex justify-between items-center shadow-lg"
+    >
+      <ul className="flex gap-6 text-white">
+        <NavItem to="/home" nav="Home" />
+        <NavItem to="/menu" nav="Menu" />
+        <NavItem to="/cart" nav={`Cart (${totalQty})`} />
       </ul>
 
       <button
-        onClick={handleLogout}
-        className="bg-red-500 px-3 py-1 rounded text-white"
+        onClick={() => {
+          logout();
+          navigate("/login");
+        }}
+        className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-white transition"
       >
         Logout
       </button>
-    </nav>
+    </motion.nav>
   );
 }

@@ -9,8 +9,14 @@ export default function CartSummary() {
   );
 
   return (
-    <h3 className="text-xl font-bold mt-6">
-      Total: ₹{total}
-    </h3>
+    <div className="mt-6 bg-gray-100 p-4 rounded-lg text-right">
+      <h3 className="text-xl font-bold">
+        Total: ₹{total}
+      </h3>
+
+      <button className="mt-3 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded">
+        Checkout
+      </button>
+    </div>
   );
 }
