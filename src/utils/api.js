@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://restaurant-app-backend-pwhj.onrender.com", // 👈 ENV BASED
+  baseURL: import.meta.env.VITE_API_URL, // 👈 ENV BASED
   headers: {
     "Content-Type": "application/json",
   },
