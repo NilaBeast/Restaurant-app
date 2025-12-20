@@ -26,6 +26,8 @@ export default function Navbar() {
         <NavItem to="/home" nav="Home" />
         <NavItem to="/menu" nav="Menu" />
         <NavItem to="/cart" nav={`Cart (${totalQty})`} />
+        <NavItem to="/orders" nav="Orders" />
+        <NavItem to="/checkout" nav="Checkout" />
       </ul>
 
       <button

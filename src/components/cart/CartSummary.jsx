@@ -1,5 +1,5 @@
 import { useCart } from "../../context/CartContext";
-
+import { Link } from "react-router-dom";
 export default function CartSummary() {
   const { cart } = useCart();
 
@@ -15,7 +15,7 @@ export default function CartSummary() {
       </h3>
 
       <button className="mt-3 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded">
-        Checkout
+        <Link to="/checkout">Checkout</Link>
       </button>
     </div>
   );
