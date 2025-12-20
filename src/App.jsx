@@ -1,18 +1,31 @@
-import AppRoutes from "./routes/AppRoutes";
+import { useLocation } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
+import AppRoutes from "./routes/AppRoutes";
 
 export default function App() {
+  const { user, loading } = useAuth();
+  const location = useLocation();
+
+  if (loading) return null;
+
+  // Pages where navbar/footer should be hidden
+  const hideLayout =
+    location.pathname === "/login" ||
+    location.pathname === "/register";
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      {/* Show Navbar only when logged in and not on auth pages */}
+      {user && !hideLayout && <Navbar />}
 
-      {/* Main content grows to push footer down */}
       <main className="flex-grow">
         <AppRoutes />
       </main>
 
-      <Footer />
+      {/* Show Footer only when logged in and not on auth pages */}
+      {user && !hideLayout && <Footer />}
     </div>
   );
 }
