@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../utils/api";
+import toast from "react-hot-toast";
 
 const AuthContext = createContext(null);
 
@@ -20,7 +21,7 @@ export function AuthProvider({ children }) {
   // 🔐 LOGIN
    const login = async (email, password) => {
   try {
-    const res = await api.post("/auth/login", {
+    const res = await api.post("/api/auth/login", {
       email,
       password,
     });
@@ -33,7 +34,7 @@ export function AuthProvider({ children }) {
 
     return true; // ✅ only on success
   } catch (error) {
-    alert(error.response?.data?.message || "Invalid email or password");
+    toast.error(error.response?.data?.message || "Invalid email or password");
     return false; // ✅ IMPORTANT
   }
 };
@@ -41,7 +42,7 @@ export function AuthProvider({ children }) {
   // 📝 REGISTER
   const register = async (username, email, password) => {
   try {
-    const res = await api.post("/auth/register", {
+    const res = await api.post("/api/auth/register", {
       username,
       email,
       password,
@@ -55,7 +56,7 @@ export function AuthProvider({ children }) {
     setUser(user);
     return true; // ✅ same as login
   } catch (error) {
-    alert(error.response?.data?.message || "Registration failed");
+    toast.error(error.response?.data?.message || "Registration failed");
     return false; // ✅ same as login
   }
 };

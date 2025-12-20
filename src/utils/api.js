@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api", // 👈 ENV BASED
+  baseURL: "https://restaurant-app-backend-pwhj.onrender.com", // 👈 ENV BASED
   headers: {
     "Content-Type": "application/json",
   },

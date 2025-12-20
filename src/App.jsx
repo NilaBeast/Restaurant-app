@@ -5,27 +5,24 @@ import Footer from "./components/common/Footer";
 import AppRoutes from "./routes/AppRoutes";
 
 export default function App() {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
   const location = useLocation();
 
   if (loading) return null;
 
   // Pages where navbar/footer should be hidden
-  const hideLayout =
-    location.pathname === "/login" ||
-    location.pathname === "/register";
+  const hideLayoutRoutes = ["/", "/login", "/register"];
+  const hideLayout = hideLayoutRoutes.includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Show Navbar only when logged in and not on auth pages */}
-      {user && !hideLayout && <Navbar />}
+      {!hideLayout && <Navbar />}
 
-      <main className="flex-grow">
+      <main className="flex-grow pt-4">
         <AppRoutes />
       </main>
 
-      {/* Show Footer only when logged in and not on auth pages */}
-      {user && !hideLayout && <Footer />}
+      {!hideLayout && <Footer />}
     </div>
   );
 }

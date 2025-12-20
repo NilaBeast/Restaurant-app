@@ -17,7 +17,7 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="bg-gradient-to-r from-violet-900 to-indigo-900 px-6 py-4 flex justify-between items-center shadow-lg"
+      className="bg-gradient-to-r from-red-900 to-black-900 px-6 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50 backdrop-blur-md"
     >
       {user && (
         <>
