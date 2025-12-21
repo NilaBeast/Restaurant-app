@@ -51,6 +51,7 @@ export default function Navbar() {
             <NavLink to="/cart" className="flex items-center gap-1">
               <ShoppingCart size={18} /> ({totalQty})
             </NavLink>
+            <NavLink to="/profile">Profile</NavLink>
 
             <button
               onClick={handleLogout}
