@@ -94,13 +94,14 @@ export default function Profile() {
       <div className="flex items-center gap-6 mb-8">
         <img
   src={
-    preview ||
-    form.profileImage ||
-    "https://i.imgur.com/HeIi0wU.png"
+    preview?.startsWith("blob")
+      ? preview
+      : `${import.meta.env.VITE_API_URL}${preview}`
   }
-  className="w-28 h-28 rounded-full object-cover"
   alt="Profile"
+  className="w-28 h-28 rounded-full object-cover border"
 />
+
 
 
 
