@@ -8,6 +8,11 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const updateUser = (updatedUser) => {
+  setUser(updatedUser);
+  localStorage.setItem("user", JSON.stringify(updatedUser));
+};
+
   // 🔁 Restore auth on refresh
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -39,10 +44,6 @@ export function AuthProvider({ children }) {
   }
 };
 
-const updateUser = (updatedUser) => {
-  setUser(updatedUser);
-  localStorage.setItem("user", JSON.stringify(updatedUser));
-};
 
 
   // 📝 REGISTER
