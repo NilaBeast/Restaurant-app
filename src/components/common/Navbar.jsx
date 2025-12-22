@@ -53,16 +53,10 @@ export default function Navbar() {
             </NavLink>
             <NavLink to="/profile">
             <img
-          src={
-            user?.profileImage
-              ? `${import.meta.env.VITE_API_URL}${user.profileImage}`
-              : "https://i.imgur.com/HeIi0wU.png"
-          }
-          alt="Profile"
-          className="w-10 h-10 rounded-full object-cover border-2 border-white 
-                     transition-all duration-300
-                     group-hover:ring-4 group-hover:ring-green-400"
-        />
+  src={user?.profileImage || "/default-avatar.png"}
+  alt="Profile"
+  className="w-8 h-8 rounded-full object-cover"
+/>
             </NavLink>
 
             <button
@@ -119,6 +113,7 @@ export default function Navbar() {
                   to="/cart"
                   label={`Cart (${totalQty})`}
                 />
+                <NavItem to="/profile" label="Profile" />
               </nav>
 
               <button

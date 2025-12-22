@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { getProfile, updateProfile } from "../services/profileService";
 import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 export default function Profile() {
+  const { updateUser } = useAuth();
   const [form, setForm] = useState({
     username: "",
     phone: "",
@@ -55,18 +57,22 @@ export default function Profile() {
   };
 
   const saveProfile = async () => {
-    try {
-      const formData = new FormData();
-      Object.entries(form).forEach(([key, value]) => {
-        if (value) formData.append(key, value);
-      });
+  try {
+    const formData = new FormData();
+    Object.entries(form).forEach(([key, value]) => {
+      if (value) formData.append(key, value);
+    });
 
-      await updateProfile(formData);
-      toast.success("Profile updated successfully");
-    } catch {
-      toast.error("Failed to update profile");
-    }
-  };
+    const updatedUser = await updateProfile(formData);
+
+    updateUser(updatedUser); // 🔥 sync navbar + storage
+    setPreview(updatedUser.profileImage);
+
+    toast.success("Profile updated successfully");
+  } catch (error) {
+    toast.error("Failed to update profile");
+  }
+};
 
   if (loading) {
     return (
@@ -99,14 +105,9 @@ export default function Profile() {
             className="relative"
           >
             <img
-              src={
-                preview?.startsWith("blob")
-                  ? preview
-                  : `${import.meta.env.VITE_API_URL}${preview}`
-              }
-              alt="Profile"
-              className="w-32 h-32 rounded-full object-cover border-4 border-green-500 shadow-lg"
-            />
+                src={preview || "https://i.imgur.com/HeIi0wU.png"}
+                className="w-32 h-32 rounded-full object-cover border"
+              />
 
             <label className="absolute bottom-0 right-0 bg-green-600 text-white p-2 rounded-full cursor-pointer hover:bg-green-700 transition">
               ✎
